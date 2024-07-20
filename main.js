@@ -1,4 +1,5 @@
 const c = document.getElementById("container");
+let onMouseHold = false;
 let boxes;
 makeGrid(70);
 function makeGrid(inp) {
@@ -25,6 +26,12 @@ function events() {
   boxes = document.getElementsByClassName("box");
   for (let box of boxes) {
     box.addEventListener("mouseover", () => {
+      if (onMouseHold) {
+        let x = parseFloat(box.style.opacity) + 0.2;
+        box.style.setProperty("opacity", x);
+      }
+    });
+    box.addEventListener("click", () => {
       let x = parseFloat(box.style.opacity) + 0.2;
       box.style.setProperty("opacity", x);
     });
@@ -45,3 +52,10 @@ function inputGrid() {
     window.alert("Enter a number less than 100!");
   }
 }
+document.addEventListener("mousedown", function () {
+  onMouseHold = true;
+});
+
+document.addEventListener("mouseup", function () {
+  onMouseHold = false;
+});
